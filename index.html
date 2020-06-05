@@ -17,9 +17,11 @@
 
 <body>
   <div class="container ">
-    <div class="form ">
-      <input type="file" id="choose" accept="image/*" onchange="openFile(event)" />
-      <button type="button" id="upload" class="btn btn-primary ">UPLOAD</button>
+    <div id="drop-area">
+      <div class="form ">
+        <input type="file" id="choose" accept="image/*" onchange="openFile(event,file)" />
+        <button type="button" id="upload" class="btn btn-primary ">UPLOAD</button>
+      </div>
     </div>
     <div class="spinner-border  loader" id="loader" role="status" style="display:none;">
       <div class="sr-only">Loading...</div>
@@ -46,6 +48,7 @@
     <div class="row tab-content">
       <div class="mainImageHolder col-lg-6 pb-3  ">
         <div id="svgEle" style="width: 500px; height: 500px ;cursor: none;">
+
           <svg id="svgbox" onmouseup="onMouseUp(event)" onload="onLoad()" onmousedown="onMouseDown(event)"
             onmousemove="getmouse(event)" style="border: 1px solid black;" width="500" height="500"
             viewBox="0 0 500 500" draggable="false">
@@ -122,6 +125,41 @@
 
 
     <script>
+      let dropArea = document.getElementById('drop-area');
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false)
+      })
+      function preventDefaults(e) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false)
+      });
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false)
+      });
+
+      function highlight(e) {
+        dropArea.classList.add('highlight')
+      }
+
+      function unhighlight(e) {
+        dropArea.classList.remove('highlight')
+      }
+
+      dropArea.addEventListener('drop', handleDrop, false)
+
+      function handleDrop(e) {
+        let dt = e.dataTransfer
+        let files = dt.files
+        /* let out = document.getElementById("output");
+        out.setAttribute("src", files[0].name); */
+        console.log(files)
+        openFile(Event, files[0]);
+      }
+
+
       function down() {
         var svgElement = document.getElementById('svgbox');
         let { width, height } = svgElement.getBBox();
@@ -293,8 +331,8 @@
         choose.click();
 
       })
-      var openFile = function (event) {
-        var input = event.target;
+      var openFile = function (event, file) {
+        var input = file;
         loader.style.display = "inline-block"
 
         var reader = new FileReader();
