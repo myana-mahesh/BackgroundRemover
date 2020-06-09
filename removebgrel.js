@@ -296,6 +296,12 @@ function toDataURL(url, callback) {
 
 
 $('.bg-button').click(e => {
+    try {
+        document.getElementById('rectbgcolor').remove();
+    } catch (error) {
+        console.log("no ele")
+    }
+
     let id = e.currentTarget.getAttribute('data-id')
     let bgele = document.getElementById('Background');
     if (id != '') {
@@ -309,9 +315,28 @@ $('.bg-button').click(e => {
     }
 });
 
-function DownloadBtn() {
-    saveSvgAsPng(document.getElementById("svgbox"), "magicremove.png")
+
+function DownloadBtn(resno) {
+    let svgele = document.getElementById("svgbox")
+    let scale = 0.0;
+    switch (resno) {
+        case 0:
+            scale = 0.75
+            break
+        case 1:
+            scale = 1.25
+            break
+        case 2:
+            scale = 2
+            break
+
+    }
+
+    saveSvgAsPng(svgele, "magicremove.png", { scale: scale })
+    console.log('downloaded')
+
 };
+
 
 $('.blur-button').click(event => {
     let filterbox = document.getElementById('filterbox');
@@ -335,4 +360,29 @@ $('.blur-button').click(event => {
 })
 
 
+function handlecolor(e) {
+    let rect;
+
+    rect = document.getElementById('rectbgcolor')
+    console.log(rect)
+    if (rect == null) {
+        console.log('create new bg ele')
+        let setbg = document.getElementById('setbg');
+        rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
+        rect.setAttribute('id', 'rectbgcolor')
+        rect.setAttribute('width', '500px')
+        rect.setAttribute('height', '500px')
+        setbg.appendChild(rect)
+    }
+    console.log('color', event.target.value)
+    rect.setAttribute('fill', e.target.value)
+
+}
+
+function handlezoom(e) {
+    let svgbox = document.getElementById('svgbox')
+    console.log(e.target.value)
+    svgbox.style.width = e.target.value + 'px'
+    svgbox.style.height = e.target.value + 'px'
+}
 
