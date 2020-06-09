@@ -1,237 +1,259 @@
 #choose {
-    display: none;
+  display: none;
 }
 
 .bg-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .blur-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #upload {
-    margin-top: 1%;
-    margin-left: 40%;
-    height: 100%;
-    width: 20%;
-    border-radius: 5px;
-    border: none;
-    padding: 1%;
-    text-align: center;
+  margin-top: 1%;
+  margin-left: 40%;
+  height: 100%;
+  width: 20%;
+  border-radius: 5px;
+  border: none;
+  padding: 1%;
+  text-align: center;
 }
 
 .loader {
-    margin-left: 48.5% !important;
-    margin-top: 2%;
-    color: blue;
+  margin-left: 48.5% !important;
+  margin-top: 2%;
+  color: blue;
 }
 
 #upload:hover {
-    background-color: rgb(120, 200, 247) !important;
+  background-color: rgb(120, 200, 247) !important;
 }
 
 @media (max-width: 450px) {
-    .smallImage {
-        height: 80px !important;
-    }
-    .opButton1 {
-        margin-left: 1% !important;
-    }
-    #pointer {
-        top: auto;
-        left: auto;
-        transform: translate(-50%, -50%);
-        position: absolute;
-    }
-    #svgEle {
-        margin-bottom: 0% !important;
-        width: 54.9% !important;
-        height: 55% !important;
-    }
-    svg {
-        margin-top: 2%;
-        margin-bottom: 0% !important;
-        width: 182% !important;
-        height: 182% !important;
-    }
-    .blur {
-        margin-left: 8% !important;
-    }
-    .heading {
-        margin-top: 2%;
-    }
-    #upload {
-        width: 50% !important;
-        margin-left: 24% !important;
-        border-radius: 5px;
-        margin-top: 3%;
-        padding: 2%;
-    }
-    .loader {
-        margin-left: 44.5% !important;
-        margin-top: 2%;
-    }
+  #home-tab {
+    margin-right: 0% !important;
+  }
+  .drop {
+    margin-top: 0.5% !important;
+  }
+  .smallImage {
+    height: 80px !important;
+  }
+  .opButton1 {
+    margin-left: 1% !important;
+  }
+  #pointer {
+    top: auto;
+    left: auto;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  #svgEle {
+    margin-bottom: 0% !important;
+    width: 70% !important;
+
+    overflow-x: hidden !important;
+  }
+  svg {
+    margin-top: 2%;
+    margin-bottom: 0% !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .blur {
+    margin-left: 8% !important;
+  }
+  .heading {
+    margin-top: 2%;
+  }
+  #upload {
+    width: 50% !important;
+    margin-left: 24% !important;
+    border-radius: 5px;
+    margin-top: 3%;
+    padding: 2%;
+  }
+  .loader {
+    margin-left: 44.5% !important;
+    margin-top: 2%;
+  }
 }
 
 .editor-container {
-    width: 85% !important;
-    margin-top: 1%;
-    border: black solid 1px;
+  width: 85% !important;
+  margin-top: 1%;
+  border: black solid 1px;
 }
 
 .cancelButton {
-    margin: 1%;
-    margin-top: 0.5%;
-    margin-left: 2%;
+  margin: 1%;
+  margin-top: 0.5%;
+  margin-left: 2%;
 }
 
 #myTab {
-    margin-left: 60%;
-    margin-top: 0.5%;
-    margin-right: auto;
+  margin-left: 60%;
+  margin-top: 0.5%;
+  margin-right: 1%;
 }
 
+.drop {
+  margin-top: 8.5%;
+}
 @media (max-width: 376px) {
-    .blur {
-        margin-left: 4% !important;
-    }
-    .funcButton {
-        margin-left: 23% !important;
-        margin-top: 5% !important;
-    }
-    .cancelButton {
-        margin-left: 5%;
-    }
-    #myTab {
-        margin-left: auto !important;
-        font-size: 80%;
-        margin-right: 5% !important;
-    }
-    .smallImageFirst {
-        margin-left: 20px !important;
-    }
-    .smallImage {
-        width: 80px !important;
-        margin-left: 10px;
-        margin-right: 0% !important;
-        padding-left: 2% !important;
-        padding-right: 0% !important;
-    }
+  .blur {
+    margin-left: 4% !important;
+  }
+  .funcButton {
+    margin-left: 23% !important;
+    margin-top: 5% !important;
+  }
+  .cancelButton {
+    margin-left: 5%;
+  }
+  #myTab {
+    margin-left: auto !important;
+    font-size: 80%;
+    margin-right: 2% !important;
+  }
+  .smallImageFirst {
+    margin-left: 20px !important;
+  }
+  .smallImage {
+    width: 80px !important;
+    margin-left: 10px;
+    margin-right: 0% !important;
+    padding-left: 2% !important;
+    padding-right: 0% !important;
+  }
 }
 
 @media (min-width: 377px) and (max-width: 1025px) {
-    .funcButton {
-        margin-left: 27.5% !important;
-        margin-top: 5% !important;
-    }
-    .cancelButton {
-        margin-left: 4.5%;
-    }
-    #myTab {
-        margin-left: auto !important;
-        font-size: 80%;
-        margin-right: 5% !important;
-    }
-    .smallImageFirst {
-        margin-left: 12% !important;
-    }
-    .smallImage {
-        width: 80px !important;
-        margin-left: 10px;
-        margin-right: 0% !important;
-        padding-left: 0% !important;
-        padding-right: 0% !important;
-    }
+  .funcButton {
+    margin-left: 27.5% !important;
+    margin-top: 5% !important;
+  }
+  .cancelButton {
+    margin-left: 4.5%;
+  }
+  #myTab {
+    margin-left: auto !important;
+    font-size: 80%;
+    margin-right: 5% !important;
+  }
+  .smallImageFirst {
+    margin-left: 12% !important;
+  }
+  .smallImage {
+    width: 80px !important;
+    margin-left: 10px;
+    margin-right: 0% !important;
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+  }
 }
 
 .mainImage {
-    padding: 2%;
-    padding-top: 1% !important;
+  padding: 2%;
+  padding-top: 1% !important;
 }
 
 .smallImageFirst {
-    margin-left: 9%;
+  margin-left: 9%;
 }
 
 .funcButton {
-    margin-left: 35%;
-    margin-top: 20%;
+  margin-left: 35%;
+  margin-top: 20%;
 }
 
 .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 10px;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: 0.2s;
-    transition: opacity 0.2s;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 .slider:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 23px;
-    height: 24px;
-    border: 0;
-    background-color: blue;
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background-color: blue;
+  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    width: 23px;
-    height: 24px;
-    border: 0;
-    background-color: blue;
-    cursor: pointer;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background-color: blue;
+  cursor: pointer;
 }
 
 .slider {
-    width: 80%;
-    margin-top: 10%;
-    margin-left: 10%;
+  width: 80%;
+  margin-top: 10%;
+  margin-left: 10%;
 }
 
 .opButton1 {
-    margin-left: 40px;
+  margin-left: 40px;
 }
 
 #home {
-    padding-left: 5% !important;
-    overflow-y: auto;
-    height: 500px;
-    background-color: #f1eeee;
+  padding-left: 5% !important;
+  overflow-y: auto;
+  height: 500px;
+  background-color: #f1eeee;
 }
 
 .blur {
-    margin-top: 5%;
-    margin-left: 10%;
-    background-color: #d3d3d3;
-    width: 35%;
-    padding: 3px;
-    border-radius: 3px;
+  margin-top: 5%;
+  margin-left: 10%;
+  background-color: #d3d3d3;
+  width: 35%;
+  padding: 3px;
+  border-radius: 3px;
 }
 
 @media (min-width: 100px) {
-    .smallImage {
-        width: 100px;
-        height: 100px;
-    }
+  .smallImage {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .form {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1%;
-    padding-top: 1%;
-    padding-bottom: 2%;
-    border: grey 0.5px dashed;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  padding-top: 1%;
+  padding-bottom: 2%;
+  border: grey 0.5px dashed;
+}
+#zoomslider {
+  width: 50% !important;
+  margin-top: 1.7% !important;
+  margin-left: 10% !important;
+}
+.edit {
+  margin-left: auto;
+  margin-right: auto;
+  height: 40px;
+  width: 120px;
+  margin-top: 16%;
 }

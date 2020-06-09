@@ -1,81 +1,69 @@
-
-let dropArea = document.getElementById('drop-area');
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false)
-})
-function preventDefaults(e) {
-    e.preventDefault()
-    e.stopPropagation()
-}
-['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, highlight, false)
+let dropArea = document.getElementById("drop-area");
+["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+  dropArea.addEventListener(eventName, preventDefaults, false);
 });
-['dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, unhighlight, false)
+function preventDefaults(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+["dragenter", "dragover"].forEach((eventName) => {
+  dropArea.addEventListener(eventName, highlight, false);
+});
+["dragleave", "drop"].forEach((eventName) => {
+  dropArea.addEventListener(eventName, unhighlight, false);
 });
 
 function highlight(e) {
-    dropArea.classList.add('highlight')
+  dropArea.classList.add("highlight");
 }
 
 function unhighlight(e) {
-    dropArea.classList.remove('highlight')
+  dropArea.classList.remove("highlight");
 }
 
-dropArea.addEventListener('drop', handleDrop, false)
+dropArea.addEventListener("drop", handleDrop, false);
 
 function handleDrop(e) {
-    let dt = e.dataTransfer
-    let files = dt.files
-    /* let out = document.getElementById("output");
+  let dt = e.dataTransfer;
+  let files = dt.files;
+  /* let out = document.getElementById("output");
     out.setAttribute("src", files[0].name); */
-    console.log(files)
-    openFile(e, files[0]);
+  console.log(files);
+  openFile(e, files[0]);
 }
-
-
 
 function down() {
-    var svgElement = document.getElementById('svgbox');
-    let { width, height } = svgElement.getBBox();
-    let clonedSvgElement = svgElement.cloneNode(true);
-    let outerHTML = clonedSvgElement.outerHTML,
-        blob = new Blob([outerHTML], { type: 'image/svg+xml;charset=utf-8' });
-    let URL = window.URL || window.webkitURL || window;
-    let blobURL = URL.createObjectURL(blob);
+  var svgElement = document.getElementById("svgbox");
+  let { width, height } = svgElement.getBBox();
+  let clonedSvgElement = svgElement.cloneNode(true);
+  let outerHTML = clonedSvgElement.outerHTML,
+    blob = new Blob([outerHTML], { type: "image/svg+xml;charset=utf-8" });
+  let URL = window.URL || window.webkitURL || window;
+  let blobURL = URL.createObjectURL(blob);
 
-    let image = new Image();
-    let canvas = document.createElement('canvas');
-    let context = canvas.getContext('2d');   // draw image in canvas starting left-0 , top - 0
-    image.onload = () => {
+  let image = new Image();
+  let canvas = document.createElement("canvas");
+  let context = canvas.getContext("2d"); // draw image in canvas starting left-0 , top - 0
+  image.onload = () => {
+    canvas.widht = width;
+    canvas.height = height;
+    context.drawImage(image, 0, 0, width, height); //  downloadImage(canvas); need to implement
+  };
+  image.src = blobURL;
+  let png = canvas.toDataURL();
 
-        canvas.widht = width;
-        canvas.height = height;
-        context.drawImage(image, 0, 0, width, height);  //  downloadImage(canvas); need to implement
-    };
-    image.src = blobURL;
-    let png = canvas.toDataURL();
-
-
-
-    downloadI(png, "image.png");
+  downloadI(png, "image.png");
 }
 var downloadI = function (href, name) {
-    var link = document.createElement('a');
-    link.download = name;
-    link.style.opacity = "0";
-    document.getElementById('download').appendChild(link);
-    link.href = href;
-    link.click();
+  var link = document.createElement("a");
+  link.download = name;
+  link.style.opacity = "0";
+  document.getElementById("download").appendChild(link);
+  link.href = href;
+  link.click();
+};
 
-}
-
-
-
-
-
-
-var fore = '';
+var fore = "";
 var mask = `iVBORw0KGgoAAAANSUhEUgAAAgwAAAHCCAIAAAAM7gYBAAAobElEQVR4nO3dWXPb2Lm2YY4gCIEAwVni0LQsu+XYXdWuHOT//4DsdNId2+32IEvWxHkyCc7fwfqMzU1ZHiSCxHBfB6kkraQAFsgH73rXEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXhHc9QUAjhAMBkOfBYPr34vlcrn4bLlcfvHvb/4N4AGEBHzn5u97
                     MBgMh8OSJMmyLElSOBxezYnlcjmfzyeTiWmak8lkPp8HAoG1vw8EAmt/s1hBZsC9CAl432oqhEKhm3kQCoUkSVJVNZlMqqoqSVIoFLL+54vFYjKZDAaDTqczGAwmk0kgEFj7+0AgsPo34/F4Op2KzBD/XsQGaQHXISTgWeLXPxwOR6PRWCwmUkH8+7U8CIVCsizrup7NZnVdl2V5LS
@@ -96,293 +84,269 @@ var mask = `iVBORw0KGgoAAAANSUhEUgAAAgwAAAHCCAIAAAAM7gYBAAAobElEQVR4nO3dWXPb2Lm2
                     HgBg57zalvDCPQDAznl1gpMX7gEAds6rS+q8cA8A4ASeXFJHSADAZnhyxMn1NwAADiF614Zh5HK5VCqlKIoHVksQEgCwGaFQKBaL6bqey+UymYyqqtFo1O0jToQEAGxGMBiMRqOqqmYymVwup+t6LBZz+4iTu68eABwlHA4ripJOp/P5fDqd9sCIEyEBABvjvREnQgIANsZ7I04uvnQAcCCPjTgREgCwSR4bcSIkAGCTPDbi5NbrBgDHEiNOqVQql8sZhuHqHWHdet0A4FheOqiOkACADfPSQXWEBABsnmcOqnPlRQOAw3nmoDpXXjQAOJxntg135UUDgMN55qA6V140ADifNw6qIyQAwBbeGHFy3xUDgCt4o3ftvisGAFfwxpI6QgIAbOGNJXWEBADYxQNL6lx2uQDgIh5oS7jscgHARTzQliAkAMAuHmhL
                     EBIAYCO3tyXcdK0A4Dpub0u46VoBwHXc3pYgJADARm5vSxASAGAvV7clXHOhAOBSrm5LuOZCAcClXL0drGsuFABcShxAJEmSLMuSJLnrYAlCAgBwK0LCKZbL5eKz5XK568sBsDGLxWI6nZqmORqNxuPxfD530XeckHCE5XI5n88nk4lpmpPJxF3PEICvWCwW4/G41+vVarXr6+tOpzMejxeLxa6v63sREo6wWCwmk0m/32+3271ezzTN+Xy+64sCcF8iITqdzunp6evXr9+8eVOr1YbDoYtCIrLrC0AgEAgsFovRaNRsNs/Pzy8vL3O5XDweD4VCLpoCsXPfP14XDAZDn7mofwgXEU/jfD4fj8fdbvf09PSPP/747bffXr9+XavVTNMkJPBjFouFaZrNZvPDhw/v3r3LZrN7e3uRSESSJH7FLF+Jge8fr7s5zyS0gk8b92d1ID59+tTpdC4vL//888/ffvvtjz/+OD097fV60+nURePJhIQjLJfL6XQqatI///xTrLhRFCUSibhrmxf7LJfL2WxmmuZwODRNczabrX7NxHjdYDDodDqDwWAymdz2pmbNWE8mk6qqyrIcjUZlWVYURZZld+2XAAcS32XRgbi4uLi4uDg7O3v9+vXr169PT09d
                     15AIEBLOMZ/Ph8NhrVZ7//79wcFBqVTKZrOKohASgii2Go3GxcVFo9EYDoerbRvxT7vdbr1e73a7XynnxdpXXdez2ayu63t7e6qqZjKZg4ODTCbDB457Eo9irVZ7+fLlixcv3r9/f3FxcXl5WavVer2e6xIiQEg4h3gBGQwGjUajVqt1u103Pk/2WSwWw+Hw4uLiP//5z9u3b1ut1nQ6Xf2nd6sk9vb2MpnMw4cPA4GAKCYICdyHeFCvrq5evnz5z3/+8/37981m89OnT6ZpTqdTN36jCQkHcfVkartZlcTbt29/++23q6ur8Xhs/dM79yQURdnf3w8EAqJ6c+N3GI5iTWe6vLw8Ozs7Pz8fDAbz+dy9658ICWdhSd1tRE9iOBy2Wq2rq6vz83PTNNf+4PtnN41Go36/L4aegsFgq9UaDodrfQ7gDsT7yng8/vTp06dPn0aj0WQy2fVF3QshAdcQX7/pdDoej03TXAuJH/3/ES2NYDA4Ho+n0yl1GzbFY696/w+mAsJwaqS/7QAAAABJRU5ErkJggg==`;
-var mousedown = false
-var mouseup = true
+var mousedown = false;
+var mouseup = true;
 var ele;
-var fill = 'none';
+var fill = "none";
 var brushSize = 50;
-var strokeColor = '#000000';
+var strokeColor = "#000000";
 var maskele;
-var pointdata = '';
+var pointdata = "";
 var cursor;
 var mouseover = false;
 var slider;
 
+$("#myTab").hide();
+$("#home").hide();
+$(".edit").click(() => {
+  $("#myTab").show();
+  $(".edit").hide();
+  $("#home").show();
+});
+
 function onLoad() {
-    maskele = document.getElementById('svgmask')
-    //document.getElementById('MaskImage').setAttribute('href', 'data:image/png;base64, ' + mask);
-    cursor = document.getElementById('pointer');
+  maskele = document.getElementById("svgmask");
+  //document.getElementById('MaskImage').setAttribute('href', 'data:image/png;base64, ' + mask);
+  cursor = document.getElementById("pointer");
 
-    cursor.style.width = brushSize + 'px'
-    cursor.style.height = brushSize + 'px'
-
+  cursor.style.width = brushSize + "px";
+  cursor.style.height = brushSize + "px";
 }
 
 slider = document.getElementById("myRange");
 slider.oninput = function () {
-    brushSize = this.value;
-    console.log(this.value);
-    cursor.style.width = brushSize + 'px';
-    cursor.style.height = brushSize + 'px';
-
-}
-
-
+  brushSize = this.value;
+  console.log(this.value);
+  cursor.style.width = brushSize + "px";
+  cursor.style.height = brushSize + "px";
+};
 
 function selectErase() {
-    strokeColor = '#000000';
+  strokeColor = "#000000";
 }
 
 function selectRestore() {
-    strokeColor = '#ffffff';
+  strokeColor = "#ffffff";
 }
 
-
-
-
 function getmouse(ev) {
-    let e;
-    if (ev.touches) {
-        e = ev.touches[ev.touches.length - 1]
-    }
-    else {
-        e = ev
-    }
+  let e;
+  if (ev.touches) {
+    e = ev.touches[ev.touches.length - 1];
+  } else {
+    e = ev;
+  }
 
-    let xPos = e.pageX - $('#svgbox').offset().left;
-    let yPos = e.pageY - $('#svgbox').offset().top;
-    // console.log(xPos, yPos);
-    $('#pointer').css({
-        'top': yPos,
-        'left': xPos
-    });
-    if (mousedown) {
-        console.log('drag')
-        mouseover = true
-        pointdata += (xPos) + ',' + (yPos) + ' '
-        ele.setAttribute('points', pointdata)
-    }
+  let xPos = e.pageX - $("#svgbox").offset().left;
+  let yPos = e.pageY - $("#svgbox").offset().top;
+  // console.log(xPos, yPos);
+  $("#pointer").css({
+    top: yPos,
+    left: xPos,
+  });
+  if (mousedown) {
+    console.log("drag");
+    mouseover = true;
+    pointdata += xPos + "," + yPos + " ";
+    ele.setAttribute("points", pointdata);
+  }
 }
 
 function onMouseDown(e) {
-    mousedown = true
-    mouseup = false
-    mouseover = false
-    ele = document.createElementNS('http://www.w3.org/2000/svg', 'polyline')
-    ele.setAttribute("fill", fill)
-    ele.setAttribute('stroke-width', brushSize)
-    ele.setAttribute('stroke', strokeColor)
-    ele.setAttribute('stroke-linecap', 'round')
-    ele.setAttribute('stroke-linejoin', 'round')
-    maskele.appendChild(ele)
+  mousedown = true;
+  mouseup = false;
+  mouseover = false;
+  ele = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+  ele.setAttribute("fill", fill);
+  ele.setAttribute("stroke-width", brushSize);
+  ele.setAttribute("stroke", strokeColor);
+  ele.setAttribute("stroke-linecap", "round");
+  ele.setAttribute("stroke-linejoin", "round");
+  maskele.appendChild(ele);
 }
 
 function onMouseUp(e) {
-    mousedown = false
-    mouseup = true
-    if (!mouseover) {
-        let xPos = e.pageX - $('#svgbox').offset().left;
-        let yPos = e.pageY - $('#svgbox').offset().top;
-        ele.setAttribute('points', (((xPos) + ',' + (yPos) + ' ') + ((xPos + 1) + ',' + (yPos) + ' ')))
-    }
-    pointdata = ''
+  mousedown = false;
+  mouseup = true;
+  if (!mouseover) {
+    let xPos = e.pageX - $("#svgbox").offset().left;
+    let yPos = e.pageY - $("#svgbox").offset().top;
+    ele.setAttribute(
+      "points",
+      xPos + "," + yPos + " " + (xPos + 1 + "," + yPos + " ")
+    );
+  }
+  pointdata = "";
 }
 
-
-
-
-
-
-
-
-
-
-
-
 function setOG() {
-    document.getElementById('og').setAttribute('href', fore)
+  document.getElementById("og").setAttribute("href", fore);
 }
 
 //uploading code
 
 var but = document.getElementById("upload");
-var choose = document.getElementById('choose');
-var loader = document.getElementById('loader');
-var cancelButton = document.getElementById('cancelButton');
-var editorContainer = document.getElementById('editor-container');
+var choose = document.getElementById("choose");
+var loader = document.getElementById("loader");
+var cancelButton = document.getElementById("cancelButton");
+var editorContainer = document.getElementById("editor-container");
 
-$('#editor-container').hide();
+//$('#editor-container').hide();
 
-$('#cancelButton').click(function () {
-    $('#editor-container').hide();
-    $('#upload').show();
-    $('#drop-area').show();
-})
-$('#erase').click(function () {
-    $(this).addClass('btn-primary');
-    $('#restore').removeClass('btn-primary')
-    selectErase();
+$("#cancelButton").click(function () {
+  $("#editor-container").hide();
+  $("#upload").show();
+  $("#drop-area").show();
 });
-$('#restore').click(function () {
-    $(this).addClass('btn-primary');
-    $('#erase').removeClass('btn-primary')
-    selectRestore();
+$("#erase").click(function () {
+  $(this).addClass("btn-primary");
+  $("#restore").removeClass("btn-primary");
+  selectErase();
+});
+$("#restore").click(function () {
+  $(this).addClass("btn-primary");
+  $("#erase").removeClass("btn-primary");
+  selectRestore();
 });
 
-but.addEventListener('click', function () {
-    choose.click();
-
-})
+but.addEventListener("click", function () {
+  choose.click();
+});
 
 var openFile = function (event) {
-
-    var input = event.target;
-    console.log(input)
-    loader.style.display = "inline-block"
-    var readerB64 = new FileReader();
-    var reader = new FileReader();
-    reader.readAsArrayBuffer(input.files[0]);
-    readerB64.readAsDataURL(input.files[0]);
-    readerB64.onload = () => {
-        fore = readerB64.result;
-        setOG();
-
-    }
-    reader.onload = function () {
-        var dataURL = reader.result;
-        console.log("before fecth");
-        fetch(
-            "http://34.105.250.110/api/remove?fileName=nns.jpg", {
-            method: "POST",
-            body: dataURL,
-        }
-        )
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (suc) {
-                //loader.style.display = "none";
-                //but.style.display = "none";
-                $('#loader').hide();
-                $('#upload').hide();
-                $('#drop-area').hide();
-                $('#editor-container').show();
-                let img = document.getElementById("MaskImage");
-                img.setAttribute('href', "data:image/png;base64, " + suc.image);
-
-            })
-            .catch((error) => console.log(error));
-        console.log("after fetch");
-    };
+  var input = event.target;
+  console.log(input);
+  loader.style.display = "inline-block";
+  var readerB64 = new FileReader();
+  var reader = new FileReader();
+  reader.readAsArrayBuffer(input.files[0]);
+  readerB64.readAsDataURL(input.files[0]);
+  readerB64.onload = () => {
+    fore = readerB64.result;
+    setOG();
+  };
+  reader.onload = function () {
+    var dataURL = reader.result;
+    console.log("before fecth");
+    fetch("http://34.105.250.110/api/remove?fileName=nns.jpg", {
+      method: "POST",
+      body: dataURL,
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (suc) {
+        //loader.style.display = "none";
+        //but.style.display = "none";
+        $("#loader").hide();
+        $("#upload").hide();
+        $("#drop-area").hide();
+        $("#editor-container").show();
+        let img = document.getElementById("MaskImage");
+        img.setAttribute("href", "data:image/png;base64, " + suc.image);
+      })
+      .catch((error) => console.log(error));
+    console.log("after fetch");
+  };
 };
-
-
-
 
 function toDataURL(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        var reader = new FileReader();
-        reader.onloadend = function () {
-            callback(reader.result);
-        }
-        reader.readAsDataURL(xhr.response);
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      callback(reader.result);
     };
-    xhr.open('GET', url);
-    xhr.responseType = 'blob';
-    xhr.send();
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open("GET", url);
+  xhr.responseType = "blob";
+  xhr.send();
 }
 
+$(".bg-button").click((e) => {
+  try {
+    document.getElementById("rectbgcolor").remove();
+  } catch (error) {
+    console.log("no ele");
+  }
 
-
-$('.bg-button').click(e => {
-    try {
-        document.getElementById('rectbgcolor').remove();
-    } catch (error) {
-        console.log("no ele")
-    }
-
-    let id = e.currentTarget.getAttribute('data-id')
-    let bgele = document.getElementById('Background');
-    if (id != '') {
-        toDataURL(id, function (dataUrl) {
-            //console.log('RESULT:', dataUrl)
-            bgele.setAttribute('href', dataUrl)
-        })
-    }
-    else {
-        bgele.setAttribute('href', 'data:image/png;base64, ')
-    }
+  let id = e.currentTarget.getAttribute("data-id");
+  let bgele = document.getElementById("Background");
+  if (id != "") {
+    toDataURL(id, function (dataUrl) {
+      //console.log('RESULT:', dataUrl)
+      bgele.setAttribute("href", dataUrl);
+    });
+  } else {
+    bgele.setAttribute("href", "data:image/png;base64, ");
+  }
 });
 
-
 function DownloadBtn(resno) {
-    let svgele = document.getElementById("svgbox")
-    let scale = 0.0;
-    switch (resno) {
-        case 0:
-            scale = 0.75
-            break
-        case 1:
-            scale = 1.25
-            break
-        case 2:
-            scale = 2
-            break
+  let svgele = document.getElementById("svgbox");
+  let scale = 0.0;
+  switch (resno) {
+    case 0:
+      scale = 0.75;
+      break;
+    case 1:
+      scale = 1.25;
+      break;
+    case 2:
+      scale = 2;
+      break;
+  }
 
-    }
+  saveSvgAsPng(svgele, "magicremove.png", { scale: scale });
+  console.log("downloaded");
+}
 
-    saveSvgAsPng(svgele, "magicremove.png", { scale: scale })
-    console.log('downloaded')
+$(".blur-button").click((event) => {
+  let filterbox = document.getElementById("filterbox");
+  let blurele = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "feGaussianBlur"
+  );
+  blurele.setAttribute("id", "blur01");
+  blurele.setAttribute("result", "blur01");
+  blurele.setAttribute("in", "SourceGraphic");
+  let ch = event.currentTarget.getAttribute("data-id");
 
-};
-
-
-$('.blur-button').click(event => {
-    let filterbox = document.getElementById('filterbox');
-    let blurele = document.createElementNS('http://www.w3.org/2000/svg', 'feGaussianBlur')
-    blurele.setAttribute('id', 'blur01')
-    blurele.setAttribute('result', 'blur01')
-    blurele.setAttribute('in', 'SourceGraphic')
-    let ch = event.currentTarget.getAttribute('data-id')
-
-    switch (ch) {
-        case "0":
-            blurele.setAttribute('stdDeviation', '0 0')
-            break;
-        case "1":
-            blurele.setAttribute('stdDeviation', '4 4')
-            break;
-        case "2":
-            blurele.setAttribute('stdDeviation', '8 8')
-    }
-    filterbox.appendChild(blurele);
-})
-
+  switch (ch) {
+    case "0":
+      blurele.setAttribute("stdDeviation", "0 0");
+      break;
+    case "1":
+      blurele.setAttribute("stdDeviation", "4 4");
+      break;
+    case "2":
+      blurele.setAttribute("stdDeviation", "8 8");
+  }
+  filterbox.appendChild(blurele);
+});
 
 function handlecolor(e) {
-    let rect;
+  let rect;
 
-    rect = document.getElementById('rectbgcolor')
-    console.log(rect)
-    if (rect == null) {
-        console.log('create new bg ele')
-        let setbg = document.getElementById('setbg');
-        rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-        rect.setAttribute('id', 'rectbgcolor')
-        rect.setAttribute('width', '500px')
-        rect.setAttribute('height', '500px')
-        setbg.appendChild(rect)
-    }
-    console.log('color', event.target.value)
-    rect.setAttribute('fill', e.target.value)
-
+  rect = document.getElementById("rectbgcolor");
+  console.log(rect);
+  if (rect == null) {
+    console.log("create new bg ele");
+    let setbg = document.getElementById("setbg");
+    rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("id", "rectbgcolor");
+    rect.setAttribute("width", "500px");
+    rect.setAttribute("height", "500px");
+    setbg.appendChild(rect);
+  }
+  console.log("color", event.target.value);
+  rect.setAttribute("fill", e.target.value);
 }
 
 function handlezoom(e) {
-    let svgbox = document.getElementById('svgbox')
-    console.log(e.target.value)
-    svgbox.style.width = e.target.value + 'px'
-    svgbox.style.height = e.target.value + 'px'
+  let svgbox = document.getElementById("svgbox");
+  console.log(e.target.value);
+  svgbox.style.width = e.target.value + "px";
+  svgbox.style.height = e.target.value + "px";
 }
-

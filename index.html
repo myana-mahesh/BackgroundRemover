@@ -33,53 +33,78 @@
     <div class="container editor-container shadow-lg" id="editor-container">
         <div class="row heading">
             <button class=" btn btn-danger cancelButton" id="cancelButton">
-            <span class="font-weight-bold">X</span>
-            </button>
+                <span class="font-weight-bold">X</span>
 
-            <button id="DownloadBtn" onclick="DownloadBtn(0)" class="btn btn-success m-2">Download Low Res</button>
-            <button id="DownloadBtn" onclick="DownloadBtn(1)" class="btn btn-success m-2">Download Mid Res</button>
-            <button id="DownloadBtn" onclick="DownloadBtn(2)" class="btn btn-success m-2">Download High Res</button>
+            </button>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle drop" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    D
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button id="DownloadBtn" onclick="DownloadBtn(0)" class="btn btn-success m-2 dropdown-item">Download
+                        Low Res</button>
+                    <button id="DownloadBtn" onclick="DownloadBtn(1)" class="btn btn-success m-2 dropdown-item">Download
+                        Mid Res</button>
+                    <button id="DownloadBtn" onclick="DownloadBtn(2)" class="btn btn-success m-2 dropdown-item">Download
+                        High Res</button>
+                </div>
+            </div>
+
+
+            <input oninput="handlezoom(event)" name="zoomslider" type="range" min="100" max="2000" value="470"
+                class="slider " id="zoomslider">
+
+
+
 
             <ul class="nav nav-tabs ml-auto" id="myTab" role="tablist" role="navigation">
                 <li class="nav-item ml-0">
-                    <a class="nav-link active btn-primary" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Background</a>
+                    <a class="nav-link active btn-primary" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                        aria-controls="home" aria-selected="true">Background</a>
                 </li>
                 <li class="nav-item ml-2">
-                    <a class="nav-link btn-primary" id="operation-tab" data-toggle="tab" href="#operation" role="tab" aria-controls="operation" aria-selected="false">Erase/Restore</a>
+                    <a class="nav-link btn-primary" id="operation-tab" data-toggle="tab" href="#operation" role="tab"
+                        aria-controls="operation" aria-selected="false">Erase/Restore</a>
                 </li>
             </ul>
         </div>
         <div class="row tab-content">
             <div class="mainImageHolder col-lg-6 pb-3">
-                <div id="svgEle" style="width: 500px; height: 500px ;cursor: none;position: relative;overflow: scroll;">
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" id="svgbox" onmouseup="onMouseUp(event)" onload="onLoad()" onmousedown="onMouseDown(event)" onmousemove="getmouse(event)"
-                        ontouchstart="onMouseDown(event)" ontouchmove="getmouse(event)" style="border: 1px solid black;" width="470" height="470" viewBox="0 0 500 500" draggable="false">
-                      <g id="setbg">
-                        <image id="Background" width="100%" height="100%" preserveAspectRatio="none" href=""
-                          draggable="false" filter="url(#filterbox)">
-                        </image>
-                      </g>
-                      <image preserveAspectRatio="xMidYMax meet" id="og" width="500" height="500" mask="url(#svgmask)"
-                        href="image.jpg" draggable="false" />
-                      
-                      
-                      <defs>
-                        <mask id="svgmask">
-                          <image id="MaskImage" preserveAspectRatio="xMidYMax meet" width="500" height="100%"
-                            href="data:image/png;base64," draggable="false">
-                          </image>
-                        </mask>
-                        <filter id="filterbox">
-                            <feGaussianBlur id="blur01" result="blur01" in="SourceGraphic" stdDeviation="0 0">
-								<!-- -->
-							</feGaussianBlur>
-                        </filter>
-                      </defs>
+                <div id="svgEle" style="width: 500px; height: 500px ;cursor: none;overflow: scroll;">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns:svgjs="http://svgjs.com/svgjs" id="svgbox" onmouseup="onMouseUp(event)" onload="onLoad()"
+                        onmousedown="onMouseDown(event)" onmousemove="getmouse(event)" ontouchstart="onMouseDown(event)"
+                        ontouchmove="getmouse(event)" style="border: 1px solid black;" width="470" height="470"
+                        viewBox="0 0 500 500" draggable="false">
+                        <g id="setbg">
+                            <image id="Background" width="100%" height="100%" preserveAspectRatio="none" href=""
+                                draggable="false" filter="url(#filterbox)">
+                            </image>
+                        </g>
+                        <image preserveAspectRatio="xMidYMax meet" id="og" width="500" height="500" mask="url(#svgmask)"
+                            href="image.jpg" draggable="false" />
+
+
+                        <defs>
+                            <mask id="svgmask">
+                                <image id="MaskImage" preserveAspectRatio="xMidYMax meet" width="500" height="100%"
+                                    href="data:image/png;base64," draggable="false">
+                                </image>
+                            </mask>
+                            <filter id="filterbox">
+                                <feGaussianBlur id="blur01" result="blur01" in="SourceGraphic" stdDeviation="0 0">
+                                    <!-- -->
+                                </feGaussianBlur>
+                            </filter>
+                        </defs>
                     </svg>
-                    <div id="pointer" style="cursor: none;box-sizing: border-box;pointer-events: none;position: absolute;top: 50%; left: 50%; width: 50px; height: 50px;transform: translate(-50%,-50%);  background-color: transparent; border: 5px solid blue; border-radius: 50%;">
+                    <div id="pointer"
+                        style="cursor: none;box-sizing: border-box;pointer-events: none;position: absolute;top: 50%; left: 50%; width: 50px; height: 50px;transform: translate(-50%,-50%);  background-color: transparent; border: 5px solid blue; border-radius: 50%;">
                     </div>
                 </div>
             </div>
+            <button class="btn btn-success edit">Edit</button>
 
             <div class="col-lg-6 tab-pane fade show active pb-3" id="home" role="tabpanel" aria-labelledby="home-tab">
 
@@ -88,13 +113,16 @@
                 <div class="h6 blur">Blur</div>
                 <div class="row">
 
-                    <div class="col-lg-3 smallImage smallImageFirst blur-button" data-id="0" style="background-color:thistle;background-size: contain;background-repeat: no-repeat;text-align: center;">
+                    <div class="col-lg-3 smallImage smallImageFirst blur-button" data-id="0"
+                        style="background-color:thistle;background-size: contain;background-repeat: no-repeat;text-align: center;">
                         <h4 class="mt-4">No Blur</h4>
                     </div>
-                    <div class="col-lg-3 smallImage smallImageFirst blur-button mx-2" data-id="1" style="background-color: wheat ;background-size: contain;background-repeat: no-repeat;text-align: center;">
+                    <div class="col-lg-3 smallImage smallImageFirst blur-button mx-2" data-id="1"
+                        style="background-color: wheat ;background-size: contain;background-repeat: no-repeat;text-align: center;">
                         <h4 class="mt-4">Blur 1</h4>
                     </div>
-                    <div class="col-lg-3 smallImage smallImageFirst blur-button mx-2" data-id="2" style="background-color:whitesmoke;background-size: contain;background-repeat: no-repeat;text-align: center;">
+                    <div class="col-lg-3 smallImage smallImageFirst blur-button mx-2" data-id="2"
+                        style="background-color:whitesmoke;background-size: contain;background-repeat: no-repeat;text-align: center;">
                         <h4 class="mt-4">Blur 2</h4>
                     </div>
 
@@ -107,27 +135,47 @@
                 <div class="h6 blur">Background</div>
 
                 <div class="row">
-                    <img class="bg-button col-lg-3 smallImage smallImageFirst" data-id="https://static.remove.bg/backgrounds/person/Nature/beach-coast-daylight-315998-size-1500.jpg" src="https://static.remove.bg/backgrounds/person/Nature/beach-coast-daylight-315998-size-156.jpg">
+                    <img class="bg-button col-lg-3 mb-2 smallImage smallImageFirst"
+                        data-id="https://static.remove.bg/backgrounds/person/Nature/beach-coast-daylight-315998-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/person/Nature/beach-coast-daylight-315998-size-156.jpg">
 
-                    <img class="bg-button col-lg-3 smallImage  " data-id="https://static.remove.bg/backgrounds/car/abstract-art-background-2847648-size-1500.jpg" src="https://static.remove.bg/backgrounds/car/abstract-art-background-2847648-size-156.jpg">
+                    <img class="bg-button col-lg-3 mb-2  smallImage  "
+                        data-id="https://static.remove.bg/backgrounds/car/abstract-art-background-2847648-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/car/abstract-art-background-2847648-size-156.jpg">
 
-                    <img class="bg-button col-lg-3 smallImage " data-id="https://static.remove.bg/backgrounds/person/Nature/background-blue-clouds-736766-size-1500.jpg" src="https://static.remove.bg/backgrounds/person/Nature/background-blue-clouds-736766-size-156.jpg">
+                    <img class="bg-button col-lg-3 mb-2  smallImage "
+                        data-id="https://static.remove.bg/backgrounds/person/Nature/background-blue-clouds-736766-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/person/Nature/background-blue-clouds-736766-size-156.jpg">
+
+
 
                 </div>
                 <div class="row">
-                    <img class="bg-button col-lg-3 smallImage smallImageFirst mt-3 mb-2" data-id="https://static.remove.bg/backgrounds/product/alex-loup-mwINQsW2KJs-unsplash_edit-size-1500.jpg" src="https://static.remove.bg/backgrounds/product/alex-loup-mwINQsW2KJs-unsplash_edit-size-156.jpg">
+                    <img class="bg-button col-lg-3 smallImage smallImageFirst mt-3 mb-2"
+                        data-id="https://static.remove.bg/backgrounds/product/alex-loup-mwINQsW2KJs-unsplash_edit-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/product/alex-loup-mwINQsW2KJs-unsplash_edit-size-156.jpg">
 
-                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2" data-id="https://static.remove.bg/backgrounds/car/asphalt-clouds-daylight-804113-size-1500.jpg" src="https://static.remove.bg/backgrounds/car/asphalt-clouds-daylight-804113-size-156.jpg">
+                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2"
+                        data-id="https://static.remove.bg/backgrounds/car/asphalt-clouds-daylight-804113-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/car/asphalt-clouds-daylight-804113-size-156.jpg">
 
-                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2" data-id="https://static.remove.bg/backgrounds/car/arid-asphalt-barren-163848-size-1500.jpg" src="https://static.remove.bg/backgrounds/car/arid-asphalt-barren-163848-size-156.jpg">
+                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2"
+                        data-id="https://static.remove.bg/backgrounds/car/arid-asphalt-barren-163848-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/car/arid-asphalt-barren-163848-size-156.jpg">
 
                 </div>
                 <div class="row">
-                    <img class="bg-button col-lg-3 smallImage smallImageFirst mt-3 mb-2" data-id="https://static.remove.bg/backgrounds/person/Artistic/art-background-design-1154738-size-1500.jpg" src="https://static.remove.bg/backgrounds/person/Artistic/art-background-design-1154738-size-156.jpg">
+                    <img class="bg-button col-lg-3 smallImage smallImageFirst mt-3 mb-2"
+                        data-id="https://static.remove.bg/backgrounds/person/Artistic/art-background-design-1154738-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/person/Artistic/art-background-design-1154738-size-156.jpg">
 
-                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2" data-id="https://static.remove.bg/backgrounds/person/Artistic/art-blur-bright-301673-size-1500.jpg" src="https://static.remove.bg/backgrounds/person/Artistic/art-blur-bright-301673-size-156.jpg">
+                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2"
+                        data-id="https://static.remove.bg/backgrounds/person/Artistic/art-blur-bright-301673-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/person/Artistic/art-blur-bright-301673-size-156.jpg">
 
-                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2" data-id="https://static.remove.bg/backgrounds/person/Urban/architecture-bay-blue-sky-1619569-size-1500.jpg" src="https://static.remove.bg/backgrounds/person/Urban/architecture-bay-blue-sky-1619569-size-156.jpg">
+                    <img class="bg-button col-lg-3 smallImage  mt-3 mb-2"
+                        data-id="https://static.remove.bg/backgrounds/person/Urban/architecture-bay-blue-sky-1619569-size-1500.jpg"
+                        src="https://static.remove.bg/backgrounds/person/Urban/architecture-bay-blue-sky-1619569-size-156.jpg">
                 </div>
 
                 <div class="row">
@@ -139,24 +187,24 @@
                 <div class="h6 blur">Color</div>
 
                 <div class="row px-3">
-                    <input class="bg-button smallImage col-lg-12 m-0 p-0" type="color" style="height: 50px;" value="#ff0f00" oninput="handlecolor(event)">
+                    <input class="bg-button smallImage col-lg-12 m-0 p-0" type="color" style="height: 50px;"
+                        value="#ff0f00" oninput="handlecolor(event)">
                 </div>
 
 
             </div>
             <div class=" col-lg-6 tab-pane fade" id="operation" role="tabpanel" aria-labelledby="operation-tab">
                 <div class="funcButton">
-                    <button class="btn opButton" id="erase">Erase</button>
-                    <button class="btn opButton1" id="restore">Restore</button>
+                    <button class="btn btn-primary opButton" id="erase">Erase</button>
+                    <button class="btn btn-primary opButton1" id="restore">Restore</button>
                 </div>
                 <div class="slidecontainer mt-4">
-                    <label for="brushsize" style="float: right;" class="m-0 p-0"> Brush Size</label>
-                    <input name="brushsize" type="range" min="1" max="100" value="50" class="slider mb-3" id="myRange">
+                    <label for="brushsize" style="margin-left: 43%;" class="mb-1 pb-2 mt-4 h6 sliderLabel"> Brush
+                        Size</label>
+                    <input name="brushsize" type="range" min="1" max="100" value="50" class="slider mt-1 pt-1 mb-3"
+                        id="myRange">
                 </div>
-                <div class="slidecontainer mt-4">
-                    <label for="zoomslider" style="float: right;" class="m-0 p-0"> Zoom</label>
-                    <input oninput="handlezoom(event)" name="zoomslider" type="range" min="100" max="2000" value="470" class="slider mb-3" id="zoomslider">
-                </div>
+
             </div>
 
         </div>
