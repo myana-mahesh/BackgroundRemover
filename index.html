@@ -51,31 +51,30 @@
                 </div>
             </div>
 
-
-            <input oninput="handlezoom(event)" name="zoomslider" type="range" min="100" max="2000" value="470"
-                class="slider " id="zoomslider">
-
-
-
-
             <ul class="nav nav-tabs ml-auto" id="myTab" role="tablist" role="navigation">
                 <li class="nav-item ml-0">
-                    <a class="nav-link active btn-primary" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                    <a class="nav-link active " id="home-tab" data-toggle="tab" href="#home" role="tab"
                         aria-controls="home" aria-selected="true">Background</a>
                 </li>
                 <li class="nav-item ml-2">
-                    <a class="nav-link btn-primary" id="operation-tab" data-toggle="tab" href="#operation" role="tab"
+                    <a class="nav-link " id="operation-tab" data-toggle="tab" href="#operation" role="tab"
                         aria-controls="operation" aria-selected="false">Erase/Restore</a>
                 </li>
             </ul>
+          <!--   <input oninput="handlezoom(event)" name="zoomslider" type="range" min="100" max="2000" value="470"
+                class="slider " id="zoomslider"> -->
+
+
+
+
         </div>
         <div class="row tab-content">
             <div class="mainImageHolder col-lg-6 pb-3">
-                <div id="svgEle" style="width: 500px; height: 500px ;cursor: none;overflow: scroll;">
+                <div id="svgEle" style="width: 500px; height: 500px ;cursor: none;">
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                         xmlns:svgjs="http://svgjs.com/svgjs" id="svgbox" onmouseup="onMouseUp(event)" onload="onLoad()"
                         onmousedown="onMouseDown(event)" onmousemove="getmouse(event)" ontouchstart="onMouseDown(event)"
-                        ontouchmove="getmouse(event)" style="border: 1px solid black;" width="470" height="470"
+                        ontouchmove="getmouse(event)"  width="470" height="470"
                         viewBox="0 0 500 500" draggable="false">
                         <g id="setbg">
                             <image id="Background" width="100%" height="100%" preserveAspectRatio="none" href=""
@@ -102,10 +101,13 @@
                     <div id="pointer"
                         style="cursor: none;box-sizing: border-box;pointer-events: none;position: absolute;top: 50%; left: 50%; width: 50px; height: 50px;transform: translate(-50%,-50%);  background-color: transparent; border: 5px solid blue; border-radius: 50%;">
                     </div>
+                    
                 </div>
             </div>
+            
+            
             <button class="btn btn-success edit">Edit</button>
-
+            
             <div class="col-lg-6 tab-pane fade show active pb-3" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 
@@ -113,7 +115,7 @@
                 <div class="h6 blur">Blur</div>
                 <div class="row">
 
-                    <div class="col-lg-3 smallImage smallImageFirst blur-button" data-id="0"
+                    <div class="col-lg-3 blurB smallImage smallImageFirst blur-button" data-id="0"
                         style="background-color:thistle;background-size: contain;background-repeat: no-repeat;text-align: center;">
                         <h4 class="mt-4">No Blur</h4>
                     </div>
@@ -147,10 +149,6 @@
                         data-id="https://static.remove.bg/backgrounds/person/Nature/background-blue-clouds-736766-size-1500.jpg"
                         src="https://static.remove.bg/backgrounds/person/Nature/background-blue-clouds-736766-size-156.jpg">
 
-
-
-                </div>
-                <div class="row">
                     <img class="bg-button col-lg-3 smallImage smallImageFirst mt-3 mb-2"
                         data-id="https://static.remove.bg/backgrounds/product/alex-loup-mwINQsW2KJs-unsplash_edit-size-1500.jpg"
                         src="https://static.remove.bg/backgrounds/product/alex-loup-mwINQsW2KJs-unsplash_edit-size-156.jpg">
@@ -163,8 +161,7 @@
                         data-id="https://static.remove.bg/backgrounds/car/arid-asphalt-barren-163848-size-1500.jpg"
                         src="https://static.remove.bg/backgrounds/car/arid-asphalt-barren-163848-size-156.jpg">
 
-                </div>
-                <div class="row">
+                
                     <img class="bg-button col-lg-3 smallImage smallImageFirst mt-3 mb-2"
                         data-id="https://static.remove.bg/backgrounds/person/Artistic/art-background-design-1154738-size-1500.jpg"
                         src="https://static.remove.bg/backgrounds/person/Artistic/art-background-design-1154738-size-156.jpg">

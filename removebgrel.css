@@ -36,6 +36,8 @@
     margin-right: 0% !important;
   }
   .drop {
+    width: 35px;
+    height: 40px;
     margin-top: 0.5% !important;
   }
   .smallImage {
@@ -52,9 +54,8 @@
   }
   #svgEle {
     margin-bottom: 0% !important;
-    width: 70% !important;
-
-    overflow-x: hidden !important;
+    width: 100% !important;
+    height: 300px !important;
   }
   svg {
     margin-top: 2%;
@@ -79,12 +80,15 @@
     margin-left: 44.5% !important;
     margin-top: 2%;
   }
+  .editor-container {
+    padding-bottom: 4%;
+  }
 }
 
 .editor-container {
   width: 85% !important;
   margin-top: 1%;
-  border: black solid 1px;
+  padding-top: 1%;
 }
 
 .cancelButton {
@@ -115,7 +119,7 @@
   }
   #myTab {
     margin-left: auto !important;
-    font-size: 80%;
+    font-size: 70%;
     margin-right: 2% !important;
   }
   .smallImageFirst {

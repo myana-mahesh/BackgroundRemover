@@ -191,7 +191,7 @@ var loader = document.getElementById("loader");
 var cancelButton = document.getElementById("cancelButton");
 var editorContainer = document.getElementById("editor-container");
 
-//$('#editor-container').hide();
+$("#editor-container").hide();
 
 $("#cancelButton").click(function () {
   $("#editor-container").hide();
